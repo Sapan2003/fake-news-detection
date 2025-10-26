@@ -1,0 +1,1 @@
+web: gunicorn fake_news_project.wsgi:application
