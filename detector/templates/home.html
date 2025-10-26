@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fake News Detector</title>
+    <style>
+        body {
+            background-color: #f9fafc;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 60px;
+        }
+        textarea {
+            width: 60%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 40px;
+            font-size: 18px;
+        }
+        .real { color: green; font-weight: bold; }
+        .fake { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>📰 Fake News Detection System</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="news_text" placeholder="Enter news text here...">{{ text|default:'' }}</textarea><br>
+        <button type="submit">Check News</button>
+    </form>
+
+    {% if label %}
+    <div class="result">
+        <p>Prediction: <span class="{{ label|lower }}">{{ label }}</span></p>
+        <p>Confidence: {{ confidence }}%</p>
+    </div>
+    {% endif %}
+</body>
+</html>
